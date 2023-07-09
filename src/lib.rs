@@ -256,7 +256,7 @@ impl Builder {
         web_sys::console::log_1(&"xxxxxxxxxxxxxxxxxx!".into());
         // Get worker script as URL encoded blob
         let script = get_worker_script(wasm_bindgen_shim_url);
-
+        web_sys::console::log_1(&script.clone().into());
         // Todo: figure out how to set stack size
         let mut options = WorkerOptions::new();
         match (name, prefix) {
@@ -273,6 +273,8 @@ impl Builder {
             (None, None) => {}
         };
 
+        web_sys::console::log_1(&"x22222!".into());
+;
         #[cfg(feature = "es_modules")]
         {
             load_module_workers_polyfill();
@@ -283,6 +285,7 @@ impl Builder {
             options.type_(WorkerType::Classic);
         }
 
+        web_sys::console::log_1(&"x33333!".into());
         // Spawn the worker
         let worker = Worker::new_with_options(script.as_str(), &options).unwrap();
         let worker_reference = std::rc::Rc::new(std::cell::Cell::new(None));
@@ -303,6 +306,8 @@ impl Builder {
         worker.set_onmessage(Some(callback.as_ref().unchecked_ref()));
         callback.forget();
 
+        web_sys::console::log_1(&"x44444!".into());
+
         let ctx_ptr = Box::into_raw(Box::new(ctx));
 
         // Pack shared wasm (module and memory) and work as a single JS array
@@ -311,6 +316,7 @@ impl Builder {
         init.push(&wasm_bindgen::memory());
         init.push(&JsValue::from(ctx_ptr as u32));
 
+        web_sys::console::log_1(&"x55555!".into());
         // Send initialization message
         worker_reference_callback.set(Some(
             match worker.post_message(&init) {
