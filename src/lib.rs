@@ -254,6 +254,11 @@ impl Builder {
         } = self;
 
         web_sys::console::log_1(&"xxxxxxxxxxxxxxxxxx!".into());
+
+        web_sys::console::log_1(&wasm_bindgen_shim_url.clone().unwrap().into());
+
+        web_sys::console::log_1(&"xxx00000!".into());
+        
         // Get worker script as URL encoded blob
         let script = get_worker_script(wasm_bindgen_shim_url);
         web_sys::console::log_1(&script.clone().into());
