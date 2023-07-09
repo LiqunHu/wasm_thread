@@ -98,6 +98,7 @@ struct BuilderRequest {
 
 impl BuilderRequest {
     pub unsafe fn spawn(self) {
+        web_sys::console::log_1(&"b1111111111111!".into());
         self.builder.spawn_for_context(self.context);
     }
 }
@@ -233,6 +234,7 @@ impl Builder {
         }
 
         if MAIN_THREAD_ID.unwrap_unchecked() == current().id() {
+            web_sys::console::log_1(&"a1111111111111!".into());
             self.spawn_for_context(context);
         } else {
             WorkerMessage::SpawnThread(BuilderRequest {
