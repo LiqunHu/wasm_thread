@@ -1,3 +1,4 @@
+extern crate web_sys;
 use async_channel::Receiver;
 use futures::executor::block_on;
 use std::any::Any;
@@ -252,6 +253,7 @@ impl Builder {
             ..
         } = self;
 
+        web_sys::console::log_1(&"xxxxxxxxxxxxxxxxxx!".into());
         // Get worker script as URL encoded blob
         let script = get_worker_script(wasm_bindgen_shim_url);
 
