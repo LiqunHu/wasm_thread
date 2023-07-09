@@ -351,7 +351,9 @@ impl<T> JoinInner<T> {
     }
 
     async fn join_async(&mut self) -> Result<T> {
+        web_sys::console::log_1(&"c1111111111111!".into());
         let res = self.receiver.recv().await;
+        web_sys::console::log_1(&"c222222!".into());
         res.map_err(|e| Box::new(e) as Box<(dyn Any + Send + 'static)>)
     }
 }
@@ -373,6 +375,7 @@ impl<T> JoinHandle<T> {
 
     /// Waits for the associated thread to finish asynchronously.
     pub async fn join_async(mut self) -> Result<T> {
+        web_sys::console::log_1(&"d1111111111111!".into());
         self.0.join_async().await
     }
 }
