@@ -63,8 +63,10 @@ pub fn get_worker_script(wasm_bindgen_shim_url: Option<String>) -> String {
         {
             template = include_str!("web_worker.js");
         }
+        web_sys::console::log_1(&"mxxxxxxxxxx!".into());
         let script = template.replace("WASM_BINDGEN_SHIM_URL", &wasm_bindgen_shim_url);
 
+        web_sys::console::log_1(&script.clone().into());
         // Create url encoded blob
         let arr = js_sys::Array::new();
         arr.set(0, JsValue::from_str(&script));
@@ -75,6 +77,8 @@ pub fn get_worker_script(wasm_bindgen_shim_url: Option<String>) -> String {
                 .unwrap(),
         )
         .unwrap();
+
+        web_sys::console::log_1(&url.clone().into());
         unsafe { SCRIPT_URL = Some(url.clone()) };
 
         url
@@ -256,10 +260,6 @@ impl Builder {
         } = self;
 
         web_sys::console::log_1(&"xxxxxxxxxxxxxxxxxx!".into());
-
-        web_sys::console::log_1(&wasm_bindgen_shim_url.clone().unwrap().into());
-
-        web_sys::console::log_1(&"xxx00000!".into());
         
         // Get worker script as URL encoded blob
         let script = get_worker_script(wasm_bindgen_shim_url);
